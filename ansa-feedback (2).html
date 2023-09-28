@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feedback</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <style>
+    .feedback-level {
+      padding: 32px;
+      height: 25vh;
+      width: 25vh;
+      transition: transform .2s;
+    }
+
+    .feedback-level-hover:hover {
+      cursor: pointer;
+      transform: scale(1.2);
+    }
+
+    .feedback-level-zoom {
+      height: 40vh !important;
+      width: 40vh !important;
+    }
+
+    .feedback-level.bad:hover {
+      color: #dc3545 !important;
+    }
+
+    .feedback-level.neutral:hover {
+      color: #0d6efd !important;
+    }
+
+    .feedback-level.good:hover {
+      color: #198754 !important;
+    }
+
+    .bs-green {
+      color: #198754 !important;
+    }
+
+    .bs-red {
+      color: #dc3545 !important;
+    }
+
+    .bs-blue {
+      color: #0d6efd !important;
+    }
+
+    input {
+      max-width: 300px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Smiley based feedback html -->
+  <div class="vh-100 vw-100 d-flex align-items-center justify-content-center">
+    <!-- three smileys -->
+    <div class="d-flex justify-content-between align-items-center flex-column">
+      <h1 class="text-center text-primary mb-5 rate-text">
+        Let us know how was your experience?
+      </h1>
+      <input id="empId" type="text" placeholder="Employee ID" class="form-control mb-3">
+      <div class="d-flex justify-content-center">
+        <div
+          class="d-flex flex-column align-items-center feedback-level feedback-level-hover text-secondary good rating-3"
+          onclick="submit(3)">
+          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="currentColor"
+            class="bi bi-emoji-smile-fill" viewBox="0 0 16 16">
+            <path
+              d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z" />
+          </svg>
+        </div>
+        <div
+          class="d-flex flex-column align-items-center feedback-level feedback-level-hover text-secondary neutral rating-2"
+          onclick="submit(2)">
+          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="currentColor"
+            class="bi bi-emoji-neutral-fill" viewBox="0 0 16 16">
+            <path
+              d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm-3 4a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z" />
+          </svg>
+        </div>
+        <div
+          class="d-flex flex-column align-items-center feedback-level feedback-level-hover text-secondary bad rating-1"
+          onclick="submit(1)">
+          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="currentColor"
+            class="bi bi-emoji-frown-fill" viewBox="0 0 16 16">
+            <path
+              d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm-2.715 5.933a.5.5 0 0 1-.183-.683A4.498 4.498 0 0 1 8 9.5a4.5 4.5 0 0 1 3.898 2.25.5.5 0 0 1-.866.5A3.498 3.498 0 0 0 8 10.5a3.498 3.498 0 0 0-3.032 1.75.5.5 0 0 1-.683.183zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z" />
+          </svg>
+        </div>
+      </div>
+      <h2 id="thank-you" class="d-none">Thank You</h2>
+    </div>
+  </div>
+
+
+  <script>
+    var submitting = false;
+    const submit = (rating) => {
+      if (submitting) return;
+      submitting = true;
+      // add color to clicked emoji
+      if (rating === 1) {
+        document.querySelector(`.rating-${rating}`).classList.add('bs-red');
+      } else if (rating === 2) {
+        document.querySelector(`.rating-${rating}`).classList.add('bs-blue');
+      } else if (rating === 3) {
+        document.querySelector(`.rating-${rating}`).classList.add('bs-green');
+      }
+      // get emp id from innput having id empId
+      const empId = document.getElementById('empId').value;
+      // make a post api call to submit the rating
+      fetch('https://surveys.infosysapps.com/public/response/BM0yH8IasRFQ', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          "surveyIdentifier": "b15792effc8acaaff318cad890401eef",
+          "source": "",
+          "questionResponses": [
+            {
+              "questionId": 58348541,
+              "questionType": "Small_text",
+              "answers": [
+                {
+                  "answer": empId,
+                  "answerDetail": "",
+                  "orderIndex": 1,
+                  "answerIndex": 0
+                }
+              ],
+              "orderIndex": 11,
+              "versionIndependentQuesId": 58348537,
+              "dynamicQuestion": false,
+              "pageId": 58348406,
+              "tags": [],
+              "textTag": ""
+            },
+            {
+              "questionId": 58348542,
+              "questionType": "Rating",
+              "answers": [
+                {
+                  "answer": rating,
+                  "answerDetail": "",
+                  "orderIndex": 1,
+                  "answerIndex": 0
+                }
+              ],
+              "orderIndex": 12,
+              "versionIndependentQuesId": 58348538,
+              "dynamicQuestion": false,
+              "pageId": 58348406,
+              "tags": [],
+              "textTag": ""
+            }
+          ],
+          "timeElapsed": 3.576,
+          "pageScores": [],
+        })
+      }).then(res => {
+        if (res.status === 200) {
+          // set the emp id to empty
+          document.getElementById('empId').value = '';
+          // hide the smileys
+          document.querySelectorAll('.feedback-level').forEach(el => {
+            !el.classList.contains(`rating-${rating}`) && el.classList.add('d-none');
+            el.classList.remove('feedback-level-hover');
+          });
+          // hide the input and rate us text and show thank you text
+          if (rating === 1) {
+            document.getElementById('thank-you').classList.add('bs-red');
+          } else if (rating === 2) {
+            document.getElementById('thank-you').classList.add('bs-blue');
+          } else if (rating === 3) {
+            document.getElementById('thank-you').classList.add('bs-green');
+          }
+          // zoom the clicked rating
+          document.querySelector(`.rating-${rating}`).classList.add('feedback-level-zoom');
+          document.getElementById('thank-you').classList.remove('d-none');
+          document.querySelector('.rate-text').classList.add('d-none');
+          document.getElementById('empId').classList.add('d-none');
+          setTimeout(() => {
+            // after 2 seconds show the smileys again
+            document.querySelectorAll('.feedback-level').forEach(el => {
+              el.classList.remove('d-none');
+              el.classList.add('feedback-level-hover');
+            });
+            // show the input and rate us text and hide thank you text
+            document.getElementById('thank-you').classList.add('d-none');
+            if (rating === 1) {
+              document.getElementById('thank-you').classList.remove('bs-red');
+              document.querySelector(`.rating-${rating}`).classList.remove('bs-red');
+            } else if (rating === 2) {
+              document.getElementById('thank-you').classList.remove('bs-blue');
+              document.querySelector(`.rating-${rating}`).classList.remove('bs-blue');
+            } else if (rating === 3) {
+              document.getElementById('thank-you').classList.remove('bs-green');
+              document.querySelector(`.rating-${rating}`).classList.remove('bs-green');
+            }
+            document.querySelector('.rate-text').classList.remove('d-none');
+            document.getElementById('empId').classList.remove('d-none');
+            document.querySelector(`.rating-${rating}`).classList.remove('bs-green');
+            document.querySelector(`.rating-${rating}`).classList.remove('feedback-level-zoom');
+            submitting = false;
+          }, 1500);
+        } else {
+          // if error then show the error message
+          alert('Something went wrong');
+          submitting = false;
+        }
+      }).catch(err => {
+        // if error then show the error message
+        alert('Something went wrong');
+        submitting = false;
+      });
+    }
+  </script>
+</body>
+
+</html>
